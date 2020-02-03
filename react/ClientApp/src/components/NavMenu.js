@@ -27,10 +27,14 @@ export class NavMenu extends Component {
       <header>
         <AppBar position="static">
       <Toolbar>
-        <Typography  variant="h6" class="col col-sm-10" >
+        <div className="col col-sm-10">
+        <Typography  variant="h6" >
           Home
         </Typography>
+        </div>
+       <div className="col col-sm-2 alnD"> 
         <Button color="inherit">Login</Button>
+        </div>
       </Toolbar>
     </AppBar>
       </header>

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Container } from 'reactstrap';
+import { Container} from 'reactstrap';
 import { NavMenu } from './NavMenu';
+import {Login} from './Login';
 
 export class Layout extends Component {
   static displayName = Layout.name;
@@ -8,10 +9,11 @@ export class Layout extends Component {
   render () {
     return (
       <div>
-        <NavMenu />
-        <Container>
-          {this.props.children}
-        </Container>
+        <div className="container-fluid">
+          <div className="row">
+         <Login/>
+         </div>
+        </div>
       </div>
     );
   }
