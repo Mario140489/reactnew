@@ -4,33 +4,34 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import '../compcss/Login.css';
 
 export class Login extends Component {
-  debugger;
-  errorusuario = false;
-  errorsenha = false;
+
+  
   static displayName = Login.name;
   constructor(props){
 
     super(props);
       this.state = {
         Usuario:"",
-        Senha:""
+        Senha:"",
+        errorusuario : false,
+        errorsenha : false,
       };
     this.Login = this.Login.bind(this);
   }
-  Login(){
+  Login(event){
     debugger;
-     if(this.state.Usuario != "" && this.state.Senha != ""){
-      
+     if(this.state.Usuario && this.state.Senha){
+      alert('logado');
      }
      else{
-       if(this.state.Usuario == ""){
-         this.errorusuario = true;
+       if(!this.state.Usuario){
+         this.setState({errorusuario:true});
        }
-       if(this.state.senha == ""){
-        this.errorsenha = true;
+       if(!this.state.senha){
+        this.setState({errorsenha:true});
       }
      }
-    
+     event.preventDefault();
   }
   render () {
     return (
@@ -48,18 +49,18 @@ export class Login extends Component {
            </Typography>
            <p></p>
           <div>
-          <FormControl required error={this.errorusuario}  className=" col-sm-12" variant="outlined">
+          <FormControl required error={this.state.errorusuario}  className=" col-sm-12" variant="outlined">
           <InputLabel htmlFor="Usuario">Usuario</InputLabel>
           <OutlinedInput required id="Usuario" value={this.state.Usuario} 
-           onChange={(event)=>{this.setState({Usuario:event.target.value})}} label="Usuario" />
+           onChange={(event)=>{this.setState({Usuario:event.target.value,errorusuario:false})}} label="Usuario" />
           </FormControl>
            </div>
            <p></p>
            <div>
-          <FormControl required error={this.errorusuario} className=" col-sm-12" variant="outlined">
+          <FormControl required error={this.state.errorsenha} className=" col-sm-12" variant="outlined">
           <InputLabel htmlFor="Senha">Senha</InputLabel>
           <OutlinedInput type="password" value={this.state.Senha} 
-          onChange={(event)=>{this.setState({Senha:event.target.value})}} id="Senha" label="Senha" />
+          onChange={(event)=>{this.setState({Senha:event.target.value, errorsenha:false})}} id="Senha" label="Senha" />
           </FormControl>
            </div>
            <p></p>
