@@ -2,42 +2,46 @@ import React, { Component } from 'react';
 import {Avatar,Button, CssBaseline,TextField,FormControlLabel,Box,Typography,makeStyles,Container,FormControl,InputLabel,Input,OutlinedInput} from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import '../compcss/Login.css';
+import 'typeface-roboto';
 
 export class Login extends Component {
-  errorusuario = true;
-  errorsenha = false;
+
+  
   static displayName = Login.name;
   constructor(props){
 
     super(props);
       this.state = {
         Usuario:"",
-        Senha:""
+        Senha:"",
+        errorusuario : false,
+        errorsenha : false,
       };
     this.Login = this.Login.bind(this);
   }
-  Login(){
+  
+  Login(event){
     debugger;
-     if(this.state.Usuario != "" && this.state.Senha != ""){
-      
+     if(this.state.Usuario && this.state.Senha){
+      alert('logado');
      }
      else{
-       if(this.state.Usuario == ""){
-         this.errorusuario = true;
+       if(!this.state.Usuario){
+         this.setState({errorusuario:true});
        }
-       if(this.state.senha == ""){
-        this.errorsenha = true;
+       if(!this.state.senha){
+        this.setState({errorsenha:true});
       }
      }
-    
+     event.preventDefault();
   }
   render () {
     return (
       <div className="col col-sm-12 ">
         <p></p>
         <div className="row">
-        <div className=" col-sm-12 col-md-3 col-lg-4"></div>
-        <div className=" col-sm-12 col-md-6 col-lg-4">
+        <div className=" col-sm-12 col-md-3 col-lg-4 mgtop"></div>
+        <div className=" col-sm-12 col-md-6 col-lg-4 mgtop">
            <form onSubmit={this.Login} noValidate className="col col-sm-12"  autoComplete="off">
            <Avatar className="avatar">
            <LockOutlinedIcon />
@@ -47,19 +51,30 @@ export class Login extends Component {
            </Typography>
            <p></p>
           <div>
-          <FormControl required error={this.errorusuario}  className=" col-sm-12" variant="outlined">
-          <InputLabel htmlFor="Usuario">Usuario</InputLabel>
-          <OutlinedInput required id="Usuario" value={this.state.Usuario} 
-           onChange={(event)=>{this.setState({Usuario:event.target.value})}} label="Usuario" />
+          <Typography >
+          <FormControl required  error={this.state.errorusuario}  
+          className=" col-sm-12 font" variant="outlined"  >
+          <InputLabel maxLength={1} htmlFor="Usuario">Usuario</InputLabel>
+          <OutlinedInput inputProps={{
+    maxLength: 50,
+    required:true
+  }} id="Usuario" maxLength={1} value={this.state.Usuario}  type="text" 
+          onChange={(event)=>{this.setState({Usuario:event.target.value,errorusuario:false})}} label="Usuario"/>
           </FormControl>
+          </Typography>
            </div>
            <p></p>
            <div>
-          <FormControl required error={this.errorsenha} className=" col-sm-12" variant="outlined">
+           <Typography >
+          <FormControl required error={this.state.errorsenha} className=" col-sm-12 font" variant="outlined">
           <InputLabel htmlFor="Senha">Senha</InputLabel>
-          <OutlinedInput type="password" value={this.state.Senha} 
-          onChange={(event)=>{this.setState({Senha:event.target.value})}} id="Senha" label="Senha" />
+          <OutlinedInput inputProps={{
+    maxLength: 20,
+    required:true
+  }} type="password" value={this.state.Senha} maxLength={10}
+          onChange={(event)=>{this.setState({Senha:event.target.value, errorsenha:false})}} id="Senha" label="Senha" />
           </FormControl>
+          </Typography>
            </div>
            <p></p>
            <div>
@@ -73,8 +88,15 @@ export class Login extends Component {
            </div>
          </form>
          </div>
-         <div className=" col-sm-12 col-md-3 col-lg-4"></div>
+         <div className=" col-sm-12 col-md-3 col-lg-4 mgtop"></div>
          </div>
+         <p></p>
+    <Typography variant="body2" color="textSecondary" align="center">
+      {'Copyright © SyS  '}
+        
+      { new Date().getFullYear()}
+      {'.'}
+    </Typography>
     </div>
     );
   }
