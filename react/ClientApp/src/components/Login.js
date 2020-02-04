@@ -4,8 +4,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import '../compcss/Login.css';
 
 export class Login extends Component {
-  debugger;
-  errorusuario = false;
+  errorusuario = true;
   errorsenha = false;
   static displayName = Login.name;
   constructor(props){
@@ -56,7 +55,7 @@ export class Login extends Component {
            </div>
            <p></p>
            <div>
-          <FormControl required error={this.errorusuario} className=" col-sm-12" variant="outlined">
+          <FormControl required error={this.errorsenha} className=" col-sm-12" variant="outlined">
           <InputLabel htmlFor="Senha">Senha</InputLabel>
           <OutlinedInput type="password" value={this.state.Senha} 
           onChange={(event)=>{this.setState({Senha:event.target.value})}} id="Senha" label="Senha" />
