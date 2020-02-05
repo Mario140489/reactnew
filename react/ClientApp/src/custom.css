@@ -20,3 +20,7 @@ button:focus {
   outline: 0px dotted !important;
   outline: 0px auto -webkit-focus-ring-color !important;
 }
+.espera {
+  z-index: +1 !important;
+  color:#fff
+}
