@@ -33,6 +33,7 @@ static displayName = Login.name;
        if(result){
         this.setState({show:false});
          localStorage.setItem('token',result.token);
+         localStorage.setItem('user',result.user.nome);
          history.push("/Home");
          
          
