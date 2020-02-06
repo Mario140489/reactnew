@@ -1,21 +1,23 @@
 import React  ,{ Component } from 'react';
-import {Avatar,Button, Backdrop,CircularProgress,Typography,makeStyles,Container,FormControl,InputLabel,Input,OutlinedInput, Hidden} from '@material-ui/core';
+import {Avatar,Button,Typography,OutlinedInput,FormHelperText,FormControl,InputLabel} from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import '../compcss/Login.css';
 import 'typeface-roboto';
 import  AcessoApi from '../Servicos/AcessoApi';
 import  {Espera} from  './Espera';
-var Api = new AcessoApi(); 
+import history from '../Servicos/history';
 
+var Api = new AcessoApi(); 
 export class Login extends Component {
-  static displayName = Login.name;
+static displayName = Login.name;
   
   constructor(props) {
     super(props);
     this.state = {
       Login: "",
       Senha: "",
-      show:false
+      show:false,
+      loggedin:false
     };
     this.erros = {
       errorusuario:false,
@@ -28,12 +30,17 @@ export class Login extends Component {
      debugger;
      const url = 'api/Usuarios/Login';
      const result = await Api.ApiPost(url,data);
-       if(result.length > 0){
-        this.setState({show:false})
-         alert('ok');
+       if(result){
+        this.setState({show:false});
+         localStorage.setItem('token',result.token);
+         history.push("/Home");
+         
+         
+         //this.setState({loggedIn:true})
        }
    }
-  async Login() {
+  async Login(event) {
+    event.preventDefault();
        this.setState({show:true})
     if (this.state.Login && this.state.Senha) {
        await this.LoginUsuario(this.state);
@@ -47,11 +54,13 @@ export class Login extends Component {
 
         this.setState({ errorsenha: true });
       }
+      this.setState({show:false})
     }
-    this.setState({show:false})
+    
   }
   render() {
     return (
+
       <div className="col col-sm-12 ">
         { this.state.show ?
         <Espera></Espera>
@@ -60,7 +69,7 @@ export class Login extends Component {
         <div className="row">
           <div className=" col-sm-12 col-md-3  col-lg-4 mgtop"></div>
           <div className=" col-sm-12 col-md-6  col-lg-4 mgtop" >
-            <form  noValidate className="col col-sm-12" autoComplete="off">
+            <form onSubmit={this.Login} noValidate className="col col-sm-12" autoComplete="off">
               <Avatar className="avatar">
                 <LockOutlinedIcon />
               </Avatar>
@@ -69,7 +78,7 @@ export class Login extends Component {
              </Typography>
               <p></p>
               <div>
-                  <FormControl required error={this.state.errorusuario}
+                  <FormControl  required error={this.state.errorusuario}
                     className=" col-sm-12 font" variant="outlined"  >
                     <InputLabel htmlFor="Usuario">Usuario</InputLabel>
                     <OutlinedInput inputProps={{
@@ -77,6 +86,12 @@ export class Login extends Component {
                       required: true
                     }} id="Usuario" value={this.state.Login} type="text"
                       onChange={(event) => { this.setState({ Login: event.target.value, errorusuario: false }) }} label="Usuario" />
+                                            { 
+                        this.state.errorusuario ?
+                        <FormHelperText  id="component-error-text">Os campos em vermelho são obrigatórios</FormHelperText>
+                        :
+                        null
+                      }
                   </FormControl>
               </div>
               <p></p>
@@ -88,15 +103,23 @@ export class Login extends Component {
                       required: true
                     }} type="password" value={this.state.Senha} maxLength={10}
                       onChange={(event) => { this.setState({ Senha: event.target.value, errorsenha: false }) }} id="Senha" label="Senha" />
+                      { 
+                        this.state.errorsenha ?
+                        <FormHelperText  id="component-error-text">Os campos em vermelho são obrigatórios</FormHelperText>
+                        :
+                        null
+                      }
+                      
                   </FormControl>
+                  
               </div>
               <p></p>
               <div>
                 <FormControl className=" col-sm-12">
-                  <Button onClick={this.Login} variant="contained" color="primary">
-                    <Typography >
+                  <Button type="submit" variant="contained" color="primary">
+                <Typography >
                       Entrar
-              </Typography>
+                </Typography>
                   </Button>
                 </FormControl>
               </div>

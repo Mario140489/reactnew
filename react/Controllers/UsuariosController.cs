@@ -27,15 +27,25 @@ namespace react.Controllers
         {
             return await _context.Usuario.ToListAsync();
         }
+        public class Logado{
+            public object user { get; set; }
+            public string token { get; set; }
+         }
         [HttpPost("Login")]
         public async Task<IActionResult> Login(Usuario usuario)
         {
            var usuariologado = await _context.Usuario.Where(b => b.Login == usuario.Login && b.Senha == usuario.Senha).ToListAsync();
-            if(usuariologado == null)
+            Usuario user = usuariologado[0];
+            if (usuariologado[0] == null)
             {
                 return null;
             }
-            return Ok(usuariologado);
+            usuario.Senha = "";
+            var token = TokenService.GenerateToken(user);
+            Logado logado = new Logado();
+            logado.user = user;
+            logado.token = token;
+            return Ok(logado);
         }
 
         // GET: api/Usuarios/5

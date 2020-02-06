@@ -9,7 +9,7 @@ export class Layout extends Component {
       <div>
         <div className="container-fluid">
           <div className="row">
-         <Login/>
+          {this.props.children}
          </div>
         </div>
       </div>
