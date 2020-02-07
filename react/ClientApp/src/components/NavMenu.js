@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Toolbar,AppBar,Typography,Button, Avatar } from '@material-ui/core';
+import { Toolbar,AppBar,Typography,Button, Avatar, IconButton } from '@material-ui/core';
 import purple from '@material-ui/core/colors/purple';
+import MenuIcon from '@material-ui/icons/Menu';
 import './NavMenu.css';
 
 export class NavMenu extends Component {
@@ -29,9 +30,13 @@ export class NavMenu extends Component {
         <AppBar position="static">
       <Toolbar>
         <div className="col col-sm-10">
-        <Typography  variant="h6" >
+          <div className='row'>
+            
+          <IconButton> <MenuIcon/> </IconButton>
+        <Typography  className="brand" variant="h6" >
           Home
         </Typography>
+        </div>
         </div>
        <div className="col col-sm-2 alnD"> 
        <Button variant="outlined" className="btnuser">
