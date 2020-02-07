@@ -5,8 +5,10 @@ import '../compcss/Login.css';
 import 'typeface-roboto';
 import  AcessoApi from '../Servicos/AcessoApi';
 import  {Espera} from  './Espera';
+import {createBrowserHistory } from "history"
+import { Link,Route,Switch,BrowserRouter as Router, } from 'react-router-dom';
+import { Home } from './Home';
 var Api = new AcessoApi(); 
-
 export class Login extends Component {
   static displayName = Login.name;
   
@@ -31,6 +33,7 @@ export class Login extends Component {
        if(result.length > 0){
         this.setState({show:false})
          alert('ok');
+        
        }
    }
   async Login() {
@@ -57,6 +60,24 @@ export class Login extends Component {
         <Espera></Espera>
         :null
         }
+        <Router>
+      <div>
+        <nav>
+          <ul>
+            <li>
+              <Link to="/Home">Home</Link>
+            </li>
+          </ul>
+        </nav>
+
+        <Switch>
+          <Route path="/Home">
+          <Home />
+          </Route>
+        </Switch>
+        
+      </div>
+    </Router>
         <div className="row">
           <div className=" col-sm-12 col-md-3  col-lg-4 mgtop"></div>
           <div className=" col-sm-12 col-md-6  col-lg-4 mgtop" >
