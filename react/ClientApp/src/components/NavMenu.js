@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Collapse, Container, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from 'reactstrap';
-import { Toolbar,AppBar,Typography,Button } from '@material-ui/core';
-import { Link } from 'react-router-dom';
+import { Toolbar,AppBar,Typography,Button, Avatar, IconButton } from '@material-ui/core';
+import purple from '@material-ui/core/colors/purple';
+import MenuIcon from '@material-ui/icons/Menu';
 import './NavMenu.css';
 
 export class NavMenu extends Component {
@@ -9,11 +9,13 @@ export class NavMenu extends Component {
 
   constructor (props) {
     super(props);
-
+    
     this.toggleNavbar = this.toggleNavbar.bind(this);
     this.state = {
+      user:"",
       collapsed: true
     };
+   this.setState({user:localStorage.getItem('user')}); 
   }
 
   toggleNavbar () {
@@ -24,20 +26,26 @@ export class NavMenu extends Component {
 
   render () {
     return (
-      <header>
+        <header className="row">
         <AppBar position="static">
       <Toolbar>
         <div className="col col-sm-10">
-        <Typography  variant="h6" >
+          <div className='row'>
+            
+          <IconButton> <MenuIcon/> </IconButton>
+        <Typography  className="brand" variant="h6" >
           Home
         </Typography>
         </div>
+        </div>
        <div className="col col-sm-2 alnD"> 
-        <Button color="inherit">Login</Button>
+       <Button variant="outlined" className="btnuser">
+        {localStorage.getItem('user')}
+       </Button>
         </div>
       </Toolbar>
     </AppBar>
-      </header>
+    </header>
     );
   }
 }

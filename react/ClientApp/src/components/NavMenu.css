@@ -16,3 +16,11 @@ html {
 .box-shadow {
   box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
 }
+.btnuser{
+
+    color: white !important;
+    border: 1px solid #f8f9fa !important;
+}
+.brand{
+  margin-top:7px !important;
+}
