@@ -1,16 +1,18 @@
 import React, { Component } from 'react';
-import {Login} from './Login';
+import {NavMenu} from './NavMenu';
 
+const isLogged = !!localStorage.getItem('token')
 export class Layout extends Component {
   static displayName = Layout.name;
 
   render () {
     return (
       <div>
+        {
+          !!localStorage.getItem('token') ? <NavMenu/> : null
+        }
         <div className="container-fluid">
-          <div className="row">
           {this.props.children}
-         </div>
         </div>
       </div>
     );

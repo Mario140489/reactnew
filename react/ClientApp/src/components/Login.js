@@ -6,8 +6,10 @@ import 'typeface-roboto';
 import  AcessoApi from '../Servicos/AcessoApi';
 import  {Espera} from  './Espera';
 import history from '../Servicos/history';
+import {Route,Redirect} from 'react-router';
 
 var Api = new AcessoApi(); 
+
 export class Login extends Component {
 static displayName = Login.name;
   
@@ -34,7 +36,10 @@ static displayName = Login.name;
         this.setState({show:false});
          localStorage.setItem('token',result.token);
          localStorage.setItem('user',result.user.nome);
-         history.push("/Home");
+         history.push('/Home');
+         // eslint-disable-next-line no-restricted-globals
+         //history.pushState("Home","home","/Home");
+         //window.location.reload();
          
          
          //this.setState({loggedIn:true})

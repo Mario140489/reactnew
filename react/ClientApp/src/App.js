@@ -16,16 +16,11 @@ export default class App extends Component {
   render () {
     return (
       <Layout>
-        <Router history = {history}>
-        <Switch>
         <Route exact path='/Login' component={Login} />
         <PrivateRoute exact path='/' component={Home}/>
         <PrivateRoute exact path='/Home' component={Home}/>
         <PrivateRoute exact path='/counter' component={Counter} />
         <PrivateRoute exact path='/fetch-data' component={FetchData} />
-        <Route path="*" component={NotFound}/>
-        </Switch>
-        </Router>
       </Layout>
     );
   }

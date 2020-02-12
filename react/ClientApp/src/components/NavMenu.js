@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
-import { Toolbar,AppBar,Typography,Button, Avatar, IconButton, Drawer } from '@material-ui/core';
+import { Toolbar,AppBar,Typography,Button ,IconButton, Drawer ,List,ListItem,ListItemText} from '@material-ui/core';
+import { Collapse, Container, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from 'reactstrap';
 import purple from '@material-ui/core/colors/purple';
 import MenuIcon from '@material-ui/icons/Menu';
-import {ArrowBackIosIcon, AccountCircleIcon} from '@material-ui/icons';
+import { Redirect } from 'react-router';
+import { Link } from 'react-router-dom';
+import {AccountCircle, ArrowBackIos} from '@material-ui/icons';
+import history from '../Servicos/history';
 import './NavMenu.css';
+
 
 export class NavMenu extends Component {
   static displayName = NavMenu.name;
@@ -25,7 +30,9 @@ export class NavMenu extends Component {
       collapsed: !this.state.collapsed
     });
   }
-
+  mudarpagina(pagina){
+    //<Redirect to="/counter" />
+  }
   render () {
     return (
         <header className="row">
@@ -33,17 +40,16 @@ export class NavMenu extends Component {
       <Toolbar>
         <div className="col col-sm-6">
           <div className='row'>
-            
           <IconButton onClick={this.toggleNavbar}> <MenuIcon className="btnmenu"/> </IconButton>
         <Typography  className="brand" variant="h6" >
-          Home
+          SYS
         </Typography>
         </div>
         </div>
        <div className="col col-sm-6 alnD"> 
        <Button variant="outlined" className="btnuser">
-         <AccountCircleIcon/>
-        {localStorage.getItem('user')}
+        <AccountCircle/> &nbsp;
+         {localStorage.getItem('user')}
        </Button>
         </div>
       </Toolbar>
@@ -55,10 +61,18 @@ export class NavMenu extends Component {
       <Typography   variant="h6" >
           Home
         </Typography>
-          <IconButton className="btndireita" onClick={this.toggleNavbar}> <ArrowBackIosIcon className="btnmenu"/> </IconButton>
-
+          <IconButton className="btndireita" onClick={this.toggleNavbar}> <ArrowBackIos className="btnmenu"/> </IconButton>
       </Toolbar>
     </AppBar>
+    <List >
+    <ListItem button component={Link} to="/counter"  >
+          <ListItemText  primary="Counter"  />
+    </ListItem>
+    <ListItem button component={Link} to="/fetch-data">
+          <ListItemText  primary="teste"  />
+    </ListItem>
+   </List>
+
      </div>
     </Drawer>
     </header>
