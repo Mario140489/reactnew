@@ -4,9 +4,9 @@ import { Collapse, Container, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLi
 import purple from '@material-ui/core/colors/purple';
 import MenuIcon from '@material-ui/icons/Menu';
 import { Redirect } from 'react-router';
-import { Link } from 'react-router-dom';
+import { Link,useHistory,BrowserRouter as Router,Route,Redirect } from 'react-router-dom';
 import {AccountCircle, ArrowBackIos} from '@material-ui/icons';
-import history from '../Servicos/history';
+//import history from '../Servicos/history';
 import './NavMenu.css';
 
 
@@ -31,18 +31,19 @@ export class NavMenu extends Component {
     });
   }
   mudarpagina(pagina){
-    //<Redirect to="/counter" />
+    alert("teste");
+    {<Redirect to="/Home"/>}
   }
   render () {
     return (
-        <header className="row">
+        <header>
         <AppBar position="static">
       <Toolbar>
         <div className="col col-sm-6">
           <div className='row'>
           <IconButton onClick={this.toggleNavbar}> <MenuIcon className="btnmenu"/> </IconButton>
         <Typography  className="brand" variant="h6" >
-          SYS
+          SyS
         </Typography>
         </div>
         </div>
@@ -69,6 +70,9 @@ export class NavMenu extends Component {
           <ListItemText  primary="Counter"  />
     </ListItem>
     <ListItem button component={Link} to="/fetch-data">
+          <ListItemText  primary="teste"  />
+    </ListItem>
+    <ListItem button onClick={() => this.mudarpagina("/Home")}>
           <ListItemText  primary="teste"  />
     </ListItem>
    </List>

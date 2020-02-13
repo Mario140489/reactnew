@@ -39,7 +39,7 @@ static displayName = Login.name;
          history.push('/Home');
          // eslint-disable-next-line no-restricted-globals
          //history.pushState("Home","home","/Home");
-         //window.location.reload();
+         window.location.reload();
          
          
          //this.setState({loggedIn:true})
