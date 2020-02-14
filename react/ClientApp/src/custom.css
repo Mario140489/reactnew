@@ -24,4 +24,6 @@ button:focus {
   z-index: +1 !important;
   color:#fff
 }
-
+body{
+  background-color: rgb(238, 238, 238);
+}

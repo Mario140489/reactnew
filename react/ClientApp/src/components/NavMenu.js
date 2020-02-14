@@ -1,28 +1,27 @@
 import React, { Component } from 'react';
 import { Toolbar,AppBar,Typography,Button ,IconButton, Drawer ,List,ListItem,ListItemText} from '@material-ui/core';
 import { Collapse, Container, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from 'reactstrap';
-import purple from '@material-ui/core/colors/purple';
 import MenuIcon from '@material-ui/icons/Menu';
-import { Redirect } from 'react-router';
-import { Link,useHistory,BrowserRouter as Router,Route,Redirect } from 'react-router-dom';
+import { Link,Route,Redirect,useHistory } from 'react-router-dom';
 import {AccountCircle, ArrowBackIos} from '@material-ui/icons';
-//import history from '../Servicos/history';
+import history from '../Servicos/history';
 import './NavMenu.css';
-
 
 export class NavMenu extends Component {
   static displayName = NavMenu.name;
 
   constructor (props) {
-    super(props);
     
+    super(props);
+    this.mudarpagina = this.mudarpagina.bind(this);
     
     this.state = {
-      user:"",
+      user:false,
       collapsed: false
     };
    this.setState({user:localStorage.getItem('user')}); 
    this.toggleNavbar = this.toggleNavbar.bind(this);
+
   }
 
   toggleNavbar () {
@@ -31,8 +30,7 @@ export class NavMenu extends Component {
     });
   }
   mudarpagina(pagina){
-    alert("teste");
-    {<Redirect to="/Home"/>}
+    history.push("/Home");
   }
   render () {
     return (
@@ -71,6 +69,9 @@ export class NavMenu extends Component {
     </ListItem>
     <ListItem button component={Link} to="/fetch-data">
           <ListItemText  primary="teste"  />
+    </ListItem>
+    <ListItem button component={Link} to="/Cliente">
+       <ListItemText primary="Cliente" />
     </ListItem>
     <ListItem button onClick={() => this.mudarpagina("/Home")}>
           <ListItemText  primary="teste"  />

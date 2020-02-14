@@ -29,7 +29,6 @@ static displayName = Login.name;
   }
   
    async LoginUsuario(data){
-     debugger;
      const url = 'api/Usuarios/Login';
      const result = await Api.ApiPost(url,data);
        if(result){
