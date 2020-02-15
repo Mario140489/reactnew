@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import {Typography,Table,TableBody,TableCell,TableContainer,TableHead,TableRow,Paper} from '@material-ui/core';
-
+import {Typography,Table,TableBody,TableCell,TableContainer,
+TableHead,TableRow,Paper,Card,CardContent } from '@material-ui/core';
 export class Cliente extends Component {
   static displayName = Cliente.name;
   constructor(props) {
@@ -18,7 +18,9 @@ export class Cliente extends Component {
                 Cliente     
                 </Typography>
                 <hr/>
-                <TableContainer component={Paper}>
+                <Card>
+                  <CardContent>
+                <TableContainer >
               <Table  aria-label="simple table">
                 <TableHead>
                   <TableRow>
@@ -28,7 +30,7 @@ export class Cliente extends Component {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {this.state.forecasts.map(forecast => (
+                  {forecasts.map(forecast => (
                     <TableRow key={forecast.id_cliente}>
                       <TableCell component="th" scope="row">
                         {forecast.id_cliente}
@@ -40,6 +42,8 @@ export class Cliente extends Component {
                 </TableBody>
               </Table>
             </TableContainer>
+            </CardContent>
+            </Card>
             </div>
     );
   }
