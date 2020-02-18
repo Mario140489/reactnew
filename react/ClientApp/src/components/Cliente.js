@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import {Typography,Table,TableBody,TableCell,TableContainer,
-TableHead,TableRow,Paper,Card,CardContent } from '@material-ui/core';
+TableHead,TableRow,Paper,Card,CardContent,IconButton,Tooltip  } from '@material-ui/core';
+import AddIcon from '@material-ui/icons/Add';
+import  {Espera} from  './Espera';
 export class Cliente extends Component {
   static displayName = Cliente.name;
   constructor(props) {
@@ -18,9 +20,15 @@ export class Cliente extends Component {
                 Cliente     
                 </Typography>
                 <hr/>
-                <Card>
+                <Card className="cemporcento">
                   <CardContent>
                 <TableContainer >
+                  <div align="Right" >
+                    <Tooltip title="Adicionar">
+                    <IconButton><AddIcon/></IconButton>
+                    </Tooltip>
+                    </div>
+                  <hr></hr>
               <Table  aria-label="simple table">
                 <TableHead>
                   <TableRow>
@@ -50,7 +58,7 @@ export class Cliente extends Component {
    render () {
        this.pulardata();
     let contents = this.state.loading
-    ? <p><em>Loading...</em></p>
+    ? <Espera/>
     : Cliente.renderForecastsTable(this.state.forecasts);
     return(
        <div>
